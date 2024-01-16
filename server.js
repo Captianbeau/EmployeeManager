@@ -7,4 +7,10 @@
 const inquirer = require('inquirer')
 
 inquirer
-    prompt.{}
+    .prompt([
+        {
+            type:'',
+            message:'',
+            name:'',
+        },
+    ])
