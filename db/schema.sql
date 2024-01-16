@@ -9,16 +9,22 @@ CREATE TABLE department (
 );
 -- roles job title, id, department, salary --
 CREATE TABLE role (
-    id ,
-    title ,
-    salary ,
-    department_id 
+    id INT PRIMARY KEY ,
+    title VARCHAR (30),
+    salary INT,
+    department_id INT,
+    FOREIGN KEY (department_id)
+    REFERENCES department(id)
+    ON DELETE SET NULL
 );
 -- employees, ids, first names, last names, job titles, departments, salaries, and managers --
 CREATE TABLE employee (
-id ,
-first_name ,
-last_name ,
-role_id ,
-manager_id ,
+id INT,
+first_name VARCHAR(30),
+last_name VARCHAR(30),
+role_id INT,
+manager_id INT,
+FOREIGN KEY (role_id)
+REFERENCES role(id)
+ON DELETE SET NULL
 );
