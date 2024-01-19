@@ -14,11 +14,31 @@ const app = express();
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 //db= mysql.createConnection
+// new inquirer.Separator()
 inquirer
     .prompt([
         {
-            type:'',
+            type:'list',
             message:'',
+            choices:'',
+            name:'',
+        },
+        {
+            type:'list',
+            message:'',
+            choices:'',
+            name:'',
+        },
+        {
+            type:'list',
+            message:'',
+            choices:'',
+            name:'',
+        },
+        {
+            type:'list',
+            message:'',
+            choices:'',
             name:'',
         },
     ]) 
