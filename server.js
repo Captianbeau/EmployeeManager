@@ -27,7 +27,7 @@ function menu() {
                     viewRoles()
                     break;
                 case 'View Departments':
-                    //View departments
+                    viewDepartments()
                     break;
                 case 'View Employees':
                     //View Employees
@@ -64,7 +64,7 @@ function viewDepartments() {
             menu()
         })
 }
-//add employee inquirer .then (funtionallity (dbstuff))
+//add employee inquirer .then (functionality (dbstuff))
 
 // inquirer
 //     .prompt([
