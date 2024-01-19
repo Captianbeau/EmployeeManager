@@ -1,3 +1,4 @@
+-- connecting a table to itself? --
 IF EXISTS DROP DATABASE regularCompany_db;
 CREATE DATABASE regularCompany_db;
 

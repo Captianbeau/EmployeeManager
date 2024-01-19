@@ -1,4 +1,4 @@
-// protect info and make a user other than root and do I create a connection with the db before or after the .then
+// protect info || make a user other than root ||  do I create a connection with the db before or after the .then? || separator in the inquirer?
 
 //view all roles,departments,employees
 //add department,role, employee
@@ -8,7 +8,7 @@ const express = require('express')
 const mysql =require('mysql2')
 const inquirer = require('inquirer')
 
-//const PORT
+//const PORT = 
 const app = express();
 
 app.use(express.urlencoded({extended: false}))
