@@ -87,8 +87,8 @@ function updateEmployeeRole(){
             },
             {
                 type:'input',
-                message:'Enter New Role'
-                name:'role'
+                message:'Enter New Role',
+                name:'role',
             }
         ]).then(({ firstName, lastName, role })=>{
             db.promise().query('')//select specific employee using name and then update role
@@ -98,16 +98,44 @@ function updateEmployeeRole(){
             })
         })
 }
+function addEmployee(){
+    inquirer
+        .prompt([
+            {
+                type:'',
+                message:'',
+                choices:'',
+                name:'',
+            },
+    ])
+}
+function addRole(){
+    inquirer
+        .prompt([
+            {
+                type:'',
+                message:'',
+                choices:'',
+                name:'',
+            },
+    ])
+}
+function addDepartment(){
+    inquirer
+        .prompt([
+            {
+                type:'',
+                message:'',
+                choices:'',
+                name:'',
+            },
+    ])
+}
 //add employee inquirer .then (functionality (dbstuff))
 
 // inquirer
 //     .prompt([
-//         {
-//             type:'list',
-//             message:'',
-//             choices:'',
-//             name:'',
-//         },
+       
 //         {
 //             type:'list',
 //             message:'',
