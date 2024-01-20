@@ -128,18 +128,37 @@ function addEmployee(){
             },
     ]).then(({ firstName, lastName, role, salary, department }) => {
         db.promise().query('INSERT INTO employee (first_name,last_name) VALUES (?,?)', firstName, lastName,)//create a new employee with the with role and department
+        .then(()=>{
+            console.log('Employee added')
+            menu()
+        })
     })
 }
 function addRole(){
     inquirer
         .prompt([
             {
-                type:'',
-                message:'',
-                choices:'',
-                name:'',
+                type:'input',
+                message:'Role Title',
+                name:'title',
             },
-    ])
+            {
+                type:'input',
+                message:'Role Salary',
+                name:'salary',
+            },
+            {
+                type:'input',
+                message:'Role Department',
+                name:'department',
+            },
+    ]).then(({title,salary,department}) => {
+        db.promise().query('INSERT INTO role (title,salary) VALUES (?,?)',title,salary)
+        .then(()=>{
+            console.log('Role added')
+            menu()
+        })
+    })
 }
 function addDepartment(){
     inquirer
