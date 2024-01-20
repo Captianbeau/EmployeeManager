@@ -36,10 +36,10 @@ function menu() {
                     updateEmployeeRole()
                     break;
                 case 'Add Employee':
-                    //Add Employee
+                    addEmployee()
                     break;
                 case 'Add Role':
-                    //Add Role
+                    addRole()
                     break;
                 case 'Add Department':
                     addDepartment()
@@ -88,7 +88,7 @@ function updateEmployeeRole(){
             {
                 type:'list',
                 message:'Employees New Role',
-                choices:'',
+                choices:roleChoice(),
                 name:'role',
             }
         ]).then(({ firstName, lastName, role })=>{
@@ -118,8 +118,9 @@ function addEmployee(){
                 name:'lastName',
             },
             {
-                type:'input',
+                type:'list',
                 message:'Employee Role Title',
+                choices: roleChoice(),
                 name:'role',
             },
             {
@@ -141,6 +142,13 @@ function addEmployee(){
         
     })
 }
+function roleChoice(){
+    db.promise().query('SELECT * title FROM role')
+    .then((results)=>{
+        const choices = results
+        return choices;
+    })
+}
 function addRole(){
     inquirer
         .prompt([
@@ -157,6 +165,7 @@ function addRole(){
             {
                 type:'input',
                 message:'Role Department',
+                choices:departmentChoices(),
                 name:'department',
             },
     ]).then(({title,salary,department}) => {
@@ -166,6 +175,13 @@ function addRole(){
             menu()
         })
     })
+}
+function departmentChoices(){
+db.promise().query('SELECT * names FROM department')
+.then((results)=>{
+    const choices = results
+    return choices;
+})
 }
 function addDepartment(){
     inquirer
@@ -183,6 +199,7 @@ function addDepartment(){
         })
     })
 }
+
 //add employee inquirer .then (functionality (dbstuff))
 
 // inquirer
