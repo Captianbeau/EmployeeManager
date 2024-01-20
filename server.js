@@ -33,7 +33,7 @@ function menu() {
                     viewEmployees()
                     break;
                 case 'Update Employee Role':
-                    //Update Employee Role
+                    updateEmployeeRole()
                     break;
                 case 'Add Employee':
                     //Add Employee
@@ -71,6 +71,32 @@ function viewEmployees(){
         console.table(data)
         menu()
     })
+}
+function updateEmployeeRole(){
+    inquirer
+        .prompt([
+            {
+                type:'input',
+                message:'Enter Employee first name',
+                name:'firstName',
+            },
+            {
+                type:'input',
+                message:'Enter Employee last name',
+                name:'lastName',
+            },
+            {
+                type:'input',
+                message:'Enter New Role'
+                name:'role'
+            }
+        ]).then(({ firstName, lastName, role })=>{
+            db.promise().query('')//select specific employee using name and then update role
+            .then(()=>{
+                console.log('Role Updated')
+                menu()
+            })
+        })
 }
 //add employee inquirer .then (functionality (dbstuff))
 
