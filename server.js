@@ -42,7 +42,7 @@ function menu() {
                     //Add Role
                     break;
                 case 'Add Department':
-                    //Add Department
+                    addDepartment()
                     break;
                 default:
                     process.exit()
@@ -86,16 +86,22 @@ function updateEmployeeRole(){
                 name:'lastName',
             },
             {
-                type:'input',
-                message:'Enter New Role',
+                type:'list',
+                message:'Employees New Role',
+                choices:'',
                 name:'role',
             }
         ]).then(({ firstName, lastName, role })=>{
-            db.promise().query('')//select specific employee using name and then update role
+            db.promise().query('SELECT FROM id WHERE title = ?',role)
+            .then((result)=>{
+                const role_id = result
+            db.promise().query('UPDATE employee SET role_id =? WHERE first_name = ? AND last_name = ? ','id', role_id,firstName,lastName)//select specific employee using name and then update role
             .then(()=>{
                 console.log('Role Updated')
                 menu()
             })
+            })
+            
         })
 }
 function addEmployee(){
@@ -113,7 +119,7 @@ function addEmployee(){
             },
             {
                 type:'input',
-                message:'Employee Role',
+                message:'Employee Role Title',
                 name:'role',
             },
             {
@@ -121,17 +127,18 @@ function addEmployee(){
                 message:'Employee Salary',
                 name:'salary',
             },
-            {
-                type:'input',
-                message:'Employee Department',
-                name:'department',
-            },
-    ]).then(({ firstName, lastName, role, salary, department }) => {
-        db.promise().query('INSERT INTO employee (first_name,last_name) VALUES (?,?)', firstName, lastName,)//create a new employee with the with role and department
+           
+    ]).then(({ firstName, lastName, role, salary }) => {
+        db.promise().query(`SELECT id FROM role WHERE title = ?`,)
+        .then((result)=>{
+            const role_id = result
+        db.promise().query('INSERT INTO employee (first_name, last_name, role_id) VALUES (?,?,?)', firstName, lastName, role_id)//create a new employee with the with role
         .then(()=>{
             console.log('Employee added')
             menu()
         })
+        })
+        
     })
 }
 function addRole(){
