@@ -97,7 +97,7 @@ function updateEmployeeRole(){
                 const role_id = result
             db.promise().query('UPDATE employee SET role_id =? WHERE first_name = ? AND last_name = ? ','id', role_id,firstName,lastName)//select specific employee using name and then update role
             .then(()=>{
-                console.log('Role Updated')
+                console.log("Employee's Role Updated")
                 menu()
             })
             })
