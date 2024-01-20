@@ -30,7 +30,7 @@ function menu() {
                     viewDepartments()
                     break;
                 case 'View Employees':
-                    //View Employees
+                    viewEmployees()
                     break;
                 case 'Update Employee Role':
                     //Update Employee Role
@@ -63,6 +63,14 @@ function viewDepartments() {
             console.table(data)
             menu()
         })
+}
+function viewEmployees(){
+    //want to add department names
+    db.promise().query('SELECT first_name,last_name,role.title,role.salary FROM employee JOIN role ON employee.role_id = role.id')
+    .then(([data])=>{
+        console.table(data)
+        menu()
+    })
 }
 //add employee inquirer .then (functionality (dbstuff))
 
