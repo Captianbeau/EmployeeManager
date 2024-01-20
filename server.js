@@ -127,7 +127,7 @@ function addEmployee(){
                 name:'department',
             },
     ]).then(({ firstName, lastName, role, salary, department }) => {
-        db.promise().query('')//create a new employee with the with role and department
+        db.promise().query('INSERT INTO employee (first_name,last_name) VALUES (?,?)', firstName, lastName,)//create a new employee with the with role and department
     })
 }
 function addRole(){
