@@ -164,12 +164,17 @@ function addDepartment(){
     inquirer
         .prompt([
             {
-                type:'',
-                message:'',
-                choices:'',
-                name:'',
+                type:'input',
+                message:'Department name',
+                name:'name',
             },
-    ])
+    ]).then((name)=>{
+        db.promise().query('INSERT INTO department (names) VALUES(?)',name)
+        .then(()=>{
+            console.log('Department added')
+            menu()
+        })
+    })
 }
 //add employee inquirer .then (functionality (dbstuff))
 
