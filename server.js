@@ -192,7 +192,10 @@ function addDepartment(){
                 name:'name',
             },
     ]).then((name)=>{
-        db.promise().query('INSERT INTO department (names) VALUES(?)',name)
+        console.log(name)
+        const names = name
+        console.log(names)
+        db.promise().query('INSERT INTO department (names) VALUES(?)',names)
         .then(()=>{
             console.log('Department added')
             menu()
