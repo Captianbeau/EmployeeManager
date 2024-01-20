@@ -102,12 +102,33 @@ function addEmployee(){
     inquirer
         .prompt([
             {
-                type:'',
-                message:'',
-                choices:'',
-                name:'',
+                type:'input',
+                message:'Employee First Name',
+                name:'firstName',
             },
-    ])
+            {
+                type:'input',
+                message:'Employee Last Name',
+                name:'lastName',
+            },
+            {
+                type:'input',
+                message:'Employee Role',
+                name:'role',
+            },
+            {
+                type:'input',
+                message:'Employee Salary',
+                name:'salary',
+            },
+            {
+                type:'input',
+                message:'Employee Department',
+                name:'department',
+            },
+    ]).then(({ firstName, lastName, role, salary, department }) => {
+        db.promise().query('')//create a new employee with the with role and department
+    })
 }
 function addRole(){
     inquirer
