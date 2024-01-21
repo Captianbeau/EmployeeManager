@@ -79,6 +79,12 @@ function updateEmployeeRole(){
     inquirer
         .prompt([
             {
+                type:'list',
+                message:'Employees New Role',
+                choices:options,
+                name:'role',
+            },
+            {
                 type:'input',
                 message:'Enter Employee first name',
                 name:'firstName',
@@ -88,15 +94,10 @@ function updateEmployeeRole(){
                 message:'Enter Employee last name',
                 name:'lastName',
             },
-            {
-                type:'list',
-                message:'Employees New Role',
-                choices:options,
-                name:'role',
-            }
-        ]).then(({ firstName, lastName, role })=>{
-            console.log(firstName,lastName,role)
-            db.promise().query('UPDATE employee SET role_id =? WHERE first_name = ? AND last_name = ? ' [role,firstName,lastName])
+            
+        ]).then(({role, firstName, lastName  })=>{
+            console.log(role, firstName,lastName)
+            db.promise().query('UPDATE employee SET role_id =? WHERE first_name = ? AND last_name = ?' [role,firstName,lastName])
             .then(()=>{
                 console.log("Employee's Role Updated")
                 menu()
