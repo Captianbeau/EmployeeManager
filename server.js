@@ -58,7 +58,7 @@ function viewRoles() {
 }
 function viewDepartments() {
     //want to add employee last_name to this table
-    db.promise().query('SELECT names, role.title FROM department JOIN role ON department.id = role.department_id')
+    db.promise().query('SELECT names, role.title FROM department JOIN role ON department.id = role.department_id')//number of roles and employees
         .then(([data]) =>{
             console.table(data)
             menu()
@@ -95,7 +95,8 @@ function updateEmployeeRole(){
                 name:'role',
             }
         ]).then(({ firstName, lastName, role })=>{
-            db.promise().query('UPDATE employee SET role_id =? WHERE first_name = ? AND last_name = ? ','id', role,firstName,lastName)//select specific employee using name and then update role
+            console.log(firstName,lastName,role)
+            db.promise().query('UPDATE employee SET role_id =? WHERE first_name = ? AND last_name = ? ' [role,firstName,lastName])
             .then(()=>{
                 console.log("Employee's Role Updated")
                 menu()
@@ -129,7 +130,7 @@ function addEmployee(){
             }
            
     ]).then(({ firstName, lastName, role}) => {
-        db.promise().query('INSERT INTO employee (first_name, last_name, role_id) VALUES (?,?,?)', firstName, lastName, role)//create a new employee with the with role
+        db.promise().query('INSERT INTO employee (first_name, last_name, role_id) VALUES (?,?,?)', [firstName, lastName, role])
         .then(()=>{
             console.log('Employee added')
             menu()
