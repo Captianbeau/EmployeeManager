@@ -73,7 +73,9 @@ function viewEmployees(){
     })
 }
 function updateEmployeeRole(){
-
+    db.promise().query('SELECT id AS value, title AS name FROM role')
+    .then(([results])=>{
+        const options = results
     inquirer
         .prompt([
             {
@@ -89,23 +91,24 @@ function updateEmployeeRole(){
             {
                 type:'list',
                 message:'Employees New Role',
-                choices:'a',
+                choices:options,
                 name:'role',
             }
         ]).then(({ firstName, lastName, role })=>{
-            db.promise().query('SELECT FROM id WHERE title = ?',role)
-            .then((result)=>{
-                const role_id = result
-            db.promise().query('UPDATE employee SET role_id =? WHERE first_name = ? AND last_name = ? ','id', role_id,firstName,lastName)//select specific employee using name and then update role
+            db.promise().query('UPDATE employee SET role_id =? WHERE first_name = ? AND last_name = ? ','id', role,firstName,lastName)//select specific employee using name and then update role
             .then(()=>{
                 console.log("Employee's Role Updated")
                 menu()
             })
-            })
+            
             
         })
+    })
 }
 function addEmployee(){
+    db.promise().query('SELECT id AS value, title AS name FROM role')
+    .then(([results])=>{
+        const options = results
     inquirer
         .prompt([
             {
@@ -121,27 +124,19 @@ function addEmployee(){
             {
                 type:'list',
                 message:'Employee Role Title',
-                choices: 'a',
+                choices: options,
                 name:'role',
-            },
-            {
-                type:'input',
-                message:'Employee Salary',
-                name:'salary',
-            },
+            }
            
-    ]).then(({ firstName, lastName, role, salary }) => {
-        db.promise().query('SELECT id FROM role WHERE title = ?',)
-        .then(([result])=>{
-            const role_id = result
-        db.promise().query('INSERT INTO employee (first_name, last_name, role_id) VALUES (?,?,?)', firstName, lastName, role_id)//create a new employee with the with role
+    ]).then(({ firstName, lastName, role}) => {
+        db.promise().query('INSERT INTO employee (first_name, last_name, role_id) VALUES (?,?,?)', firstName, lastName, role)//create a new employee with the with role
         .then(()=>{
             console.log('Employee added')
             menu()
-        })
+        
         })
         
-    })
+    })})
 }
 function addRole(){
    db.promise().query('SELECT id AS value, names AS name FROM department') 
