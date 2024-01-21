@@ -167,18 +167,14 @@ function addRole(){
                 name:'department',
             },
     ]).then(({title,salary,department}) => {
-        db.promise().query('Select id FROM department WHERE names = ?', department)
-        .then((results) => {
-            console.log(results)
-            const department_id = results
-            console.log(department_id)
-        // db.promise().query('INSERT INTO role ( title, salary, department_id ) VALUES ( ?, ?, ? )', [title, salary, department_id])
-        // .then(()=>{
-        //     console.log('Role added')
-        //     menu()
-        // })
+        
+        db.promise().query('INSERT INTO role ( title, salary, department_id ) VALUES ( ?, ?, ? )', [title, salary, department])
+        .then(()=>{
+            console.log('Role added')
+            menu()
+        
     })
-    })
+     })
 })
 }
 
