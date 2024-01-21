@@ -58,7 +58,7 @@ function viewRoles() {
 }
 function viewDepartments() {
     //want to add employee last_name to this table
-    db.promise().query('SELECT names,roles.titles FROM department JOIN role ON department.id = role.department_id')
+    db.promise().query('SELECT names, role.title FROM department JOIN role ON department.id = role.department_id')
         .then(([data]) =>{
             console.table(data)
             menu()
@@ -89,7 +89,7 @@ function updateEmployeeRole(){
             {
                 type:'list',
                 message:'Employees New Role',
-                choices:,
+                choices:'a',
                 name:'role',
             }
         ]).then(({ firstName, lastName, role })=>{
@@ -121,7 +121,7 @@ function addEmployee(){
             {
                 type:'list',
                 message:'Employee Role Title',
-                choices: roleChoice(),
+                choices: 'a',
                 name:'role',
             },
             {
@@ -131,7 +131,7 @@ function addEmployee(){
             },
            
     ]).then(({ firstName, lastName, role, salary }) => {
-        db.promise().query(`SELECT id FROM role WHERE title = ?`,)
+        db.promise().query('SELECT id FROM role WHERE title = ?',)
         .then(([result])=>{
             const role_id = result
         db.promise().query('INSERT INTO employee (first_name, last_name, role_id) VALUES (?,?,?)', firstName, lastName, role_id)//create a new employee with the with role
@@ -147,7 +147,7 @@ function addRole(){
    db.promise().query('SELECT id AS value, names AS name FROM department') 
    .then(([results])=>{
     const options = results
-    console.log(options)
+    
     inquirer
         .prompt([
             {
@@ -167,11 +167,17 @@ function addRole(){
                 name:'department',
             },
     ]).then(({title,salary,department}) => {
-        db.promise().query('INSERT INTO role (title, salary, department_id) VALUES (?,?,?)',title,salary)
-        .then(()=>{
-            console.log('Role added')
-            menu()
-        })
+        db.promise().query('Select id FROM department WHERE names = ?', department)
+        .then((results) => {
+            console.log(results)
+            const department_id = results
+            console.log(department_id)
+        // db.promise().query('INSERT INTO role ( title, salary, department_id ) VALUES ( ?, ?, ? )', [title, salary, department_id])
+        // .then(()=>{
+        //     console.log('Role added')
+        //     menu()
+        // })
+    })
     })
 })
 }
@@ -184,10 +190,8 @@ function addDepartment(){
                 message:'Department name',
                 name:'name',
             },
-    ]).then(({answer})=>{
-        
-        
-        db.promise().query('INSERT INTO department (names) VALUES(?)', answer)
+    ]).then(({name})=>{
+        db.promise().query('INSERT INTO department (names) VALUES(?)', name)
         .then(()=>{
             console.log('Department added')
             menu()

@@ -1,4 +1,5 @@
 -- Su-jin, Lee, Quest Designer, Manager Byung-soo Kwon
+
 INSERT INTO department (names) 
 VALUES 
     ("Game Design"),
