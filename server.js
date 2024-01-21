@@ -50,22 +50,21 @@ function menu() {
         })
 }
 function viewRoles() {
-    db.promise().query('SELECT title,salary,department.names FROM role JOIN department ON role.department_id = department.id')
+    db.promise().query('SELECT title,salary,department.names FROM role JOIN department ON role.department_id = department.id')//number of employees
         .then(([data]) => {
             console.table(data)
             menu()
         })
 }
 function viewDepartments() {
-    //want to add employee last_name to this table
-    db.promise().query('SELECT names, role.title FROM department JOIN role ON department.id = role.department_id')//number of roles and employees
+    db.promise().query('SELECT names, role.title FROM department JOIN role ON department.id = role.department_id')
         .then(([data]) =>{
             console.table(data)
             menu()
         })
 }
 function viewEmployees(){
-    //want to add department names
+    //want to add department names, and managers?
     db.promise().query('SELECT first_name,last_name,role.title,role.salary FROM employee JOIN role ON employee.role_id = role.id')
     .then(([data])=>{
         console.table(data)
