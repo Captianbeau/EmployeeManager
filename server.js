@@ -73,6 +73,7 @@ function viewEmployees(){
     })
 }
 function updateEmployeeRole(){
+
     inquirer
         .prompt([
             {
@@ -88,7 +89,7 @@ function updateEmployeeRole(){
             {
                 type:'list',
                 message:'Employees New Role',
-                choices:roleChoice(),
+                choices:,
                 name:'role',
             }
         ]).then(({ firstName, lastName, role })=>{
@@ -131,7 +132,7 @@ function addEmployee(){
            
     ]).then(({ firstName, lastName, role, salary }) => {
         db.promise().query(`SELECT id FROM role WHERE title = ?`,)
-        .then((result)=>{
+        .then(([result])=>{
             const role_id = result
         db.promise().query('INSERT INTO employee (first_name, last_name, role_id) VALUES (?,?,?)', firstName, lastName, role_id)//create a new employee with the with role
         .then(()=>{
@@ -142,14 +143,11 @@ function addEmployee(){
         
     })
 }
-function roleChoice(){
-    db.promise().query('SELECT * title FROM role')
-    .then((results)=>{
-        const choices = results
-        return choices;
-    })
-}
 function addRole(){
+   db.promise().query('SELECT id AS value, names AS name FROM department') 
+   .then(([results])=>{
+    const options = results
+    console.log(options)
     inquirer
         .prompt([
             {
@@ -163,26 +161,21 @@ function addRole(){
                 name:'salary',
             },
             {
-                type:'input',
+                type:'list',
                 message:'Role Department',
-                choices:departmentChoices(),
+                choices: options,
                 name:'department',
             },
     ]).then(({title,salary,department}) => {
-        db.promise().query('INSERT INTO role (title,salary) VALUES (?,?)',title,salary)
+        db.promise().query('INSERT INTO role (title, salary, department_id) VALUES (?,?,?)',title,salary)
         .then(()=>{
             console.log('Role added')
             menu()
         })
     })
-}
-function departmentChoices(){
-db.promise().query('SELECT * names FROM department')
-.then((results)=>{
-    const choices = results
-    return choices;
 })
 }
+
 function addDepartment(){
     inquirer
         .prompt([
@@ -191,11 +184,10 @@ function addDepartment(){
                 message:'Department name',
                 name:'name',
             },
-    ]).then((name)=>{
-        console.log(name)
-        const names = name
-        console.log(names)
-        db.promise().query('INSERT INTO department (names) VALUES(?)',names)
+    ]).then(({answer})=>{
+        
+        
+        db.promise().query('INSERT INTO department (names) VALUES(?)', answer)
         .then(()=>{
             console.log('Department added')
             menu()
