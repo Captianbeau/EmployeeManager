@@ -94,9 +94,9 @@ function updateEmployeeRole(){
                 name:'lastName',
             },
             
-        ]).then(({role, firstName, lastName  })=>{
+        ]).then(({role, firstName, lastName })=>{
             console.log(role, firstName,lastName)
-            db.promise().query('UPDATE employee SET role_id =? WHERE first_name = ? AND last_name = ?' [role,firstName,lastName])
+            db.promise().query('UPDATE employee SET role_id =? WHERE first_name = ?', [role,firstName,lastName])
             .then(()=>{
                 console.log("Employee's Role Updated")
                 menu()
