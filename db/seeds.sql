@@ -1,5 +1,4 @@
--- Su-jin, Lee, Quest Designer, Manager Byung-soo Kwon
-
+-- department seed --
 INSERT INTO department (id, names) 
 VALUES 
     (1,"Game Design"),
@@ -7,7 +6,9 @@ VALUES
     (3,"Art"),
     (4,"Sound"),
     (5,"Quality Assurance");
+-- department end --
 
+-- role seed --
 INSERT INTO role (id, title, salary, department_id)
 VALUES
     (1, "Lead Combat Designer", 80000, 1),
@@ -26,7 +27,9 @@ VALUES
     (14, "Sound Artist", 75000, 4),
     (15, "QA Lead", 80000, 5),
     (16, "QA", 75000, 5);
+-- role end --
 
+-- employee seed --
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES
     (1, "Jeong-hyeon", "Lee", 1, null),
@@ -54,4 +57,6 @@ VALUES
     (23, "Hyeon-hee", "Park", 14, 22),
     (24, "Hong-jun", "Park", 14, 22),
     (25, "Ju-sun", "Han", 15, null),
-    (26, "Woong-kyoo", "Kim", 16, 25);
+    (26, "Woong-kyoo", "Kim", 16, 25),
+    (27, "Su-jin", "Lee", 5, 7);
+-- employee end --
