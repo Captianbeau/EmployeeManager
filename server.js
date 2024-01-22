@@ -50,14 +50,14 @@ function menu() {
         })
 }
 function viewRoles() {
-    db.promise().query('SELECT title,salary,department.names FROM role JOIN department ON role.department_id = department.id')//number of employees
+    db.promise().query('SELECT title,salary,department.names AS department FROM role JOIN department ON role.department_id = department.id')
         .then(([data]) => {
             console.table(data)
             menu()
         })
 }
 function viewDepartments() {
-    db.promise().query('SELECT names, role.title FROM department JOIN role ON department.id = role.department_id')
+    db.promise().query('SELECT names AS departments , role.title AS roles FROM department JOIN role ON department.id = role.department_id')
         .then(([data]) =>{
             console.table(data)
             menu()
