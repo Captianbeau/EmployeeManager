@@ -1,14 +1,17 @@
-
+-- !!DROP DATABASE WARNING!! --
 DROP DATABASE IF EXISTS regularCompany_db;
 CREATE DATABASE regularCompany_db;
 
+-- database to be used --
 USE regularCompany_db;
--- department name,id --
+
+-- department: name,id --
 CREATE TABLE department (
     id INT UNIQUE PRIMARY KEY AUTO_INCREMENT,
     names VARCHAR(30)
 );
--- roles job title, id, department, salary --
+
+-- role: id, title, salary, department_id --
 CREATE TABLE role (
     id INT UNIQUE PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR (30),
@@ -18,7 +21,8 @@ CREATE TABLE role (
     REFERENCES department(id)
     ON DELETE SET NULL
 );
--- employees, ids, first names, last names, job titles, departments, salaries, and managers --
+
+-- employee: id, first_name, last_name, role_id, manager_id --
 CREATE TABLE employee (
 id INT PRIMARY KEY AUTO_INCREMENT,
 first_name VARCHAR(30),
